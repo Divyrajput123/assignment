@@ -1,0 +1,14 @@
+@import 'color.scss';
+@mixin div1($top,$col){
+position: relative;
+top: $top;
+
+h1{
+  background-color:$col;
+  color: $color;
+  }
+  p{
+   
+    color:$color;
+  }
+}
