@@ -18,6 +18,7 @@ export default {
     label:['Name','email',{'lab':'Whatareyou?','name1':'University Student','name2':'Professional'},'University','Major','Graduationdate',{'lab':'DoyouhaveataxID','name1':'I have taxID','name2':'I dont have'},'Mobile'],
     dataStore:[],
     flag:true,
+    done:localStorage.getItem('done')
     
     }
     

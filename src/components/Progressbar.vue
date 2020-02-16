@@ -2,10 +2,10 @@
   <main>
     <div class="container">
       <ul class="progressbar">
-        <li @click="activate(1)" :class="{ active : active_el == 1 ,activate:active_el>=2,done:active_el>1}" >PERSONAL INFO</li>
-        <li @click="activate(2)" :class="{ active : active_el == 2,activate:active_el>2}">PROFILE</li>
-        <li @click="activate(3)" :class="{ active : active_el == 3 ,activate:active_el>3}">EXPERTISE</li>
-        <li @click="activate(4)" :class="{ active : active_el == 4 ,activate:active_el>4}">INTERVIEW</li><br>
+        <li @click="activate(1)" :class="{ active : active_el == 1 ,activate:active_el>1,done:this.done>1}" >PERSONAL INFO</li>
+        <li @click="activate(2)" :class="{ active : active_el == 2,activate:active_el>2,done:this.done>2}">PROFILE</li>
+        <li @click="activate(3)" :class="{ active : active_el == 3 ,activate:active_el>3,done:this.done>3}">EXPERTISE</li>
+        <li @click="activate(4)" :class="{ active : active_el == 4 ,activate:active_el>4,done:this.done>4}">INTERVIEW</li><br>
       </ul>
     </div>
   </main>
@@ -17,6 +17,8 @@ export default {
 methods:{
 activate:function(el){
   this.active_el = el;
+  this.done=el
+  localStorage.setItem('done',this.done)
   localStorage.setItem('active',el)
   window.console.log(this.active_el)
   if(this.active_el==1){
@@ -36,13 +38,15 @@ activate:function(el){
 },
 data:function(){
 return{
-  active_el:localStorage.getItem('active')
+  active_el:localStorage.getItem('active'),
+  done:localStorage.getItem('done')
 
 }
 },
     created:{
   fun(){
     localStorage.setItem('active',0)
+    localStorage.setItem('done',1)
   }
 }
 }
@@ -101,7 +105,6 @@ return{
   border-color: orange;
   background-color: orange;
   color: white;
- 
 } 
 
 // .progressbar li.active+li:after{
@@ -111,10 +114,11 @@ return{
 .progressbar li.activate+li:after{
   border-bottom: 1px dotted orange;
   
+  
 }
-.progressbar li.done+li:before{
+.progressbar li.done:before{
       content: "✓";
-      color: #ffffff;
+      color: orange;
       font-size: 20px;
 }
 </style>
