@@ -1,7 +1,7 @@
 <template>
   <main>
     <progressbar></progressbar><br>
-    <auto-textarea v-model="inputValue" v-bind:placeholder="placeholder" v-bind:label="label"></auto-textarea>
+    <auto-textarea @textUpdate="texts($event)" v-model="inputValue" v-bind:placeholder="placeholder" v-bind:label="label"></auto-textarea>
     <WorkHistory @updatework="validation($event)" v-bind:work="work" class="w"></WorkHistory>
     <a @click="pushAttributes" v-if="active" >+Add another job</a>
     <Education @updateEdu="Education($event)" v-bind:school="school"></Education>
@@ -36,6 +36,7 @@ data () {
         active1:false,
         EduHistory:[],
         Flag:true,
+        text:[]
 
 
       }
@@ -90,6 +91,15 @@ for(var i=0;i<this.EduHistory.length;i++){
 },
 nextPage(){
   this.$router.push('/expertise')
+},
+texts(value){
+this.text=value
+if(this.text.length!==2|| this.text.length=='undefined'){
+  window.console.log(this.text.length)
+this.Flag=false
+
+}
+
 }
 
     },

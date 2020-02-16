@@ -53,7 +53,7 @@ methods:{
     this.year=parseInt(event.target.value) ;
    
   },
-  setCompany(event){
+  setSchool(event){
     this.School=event.target.value;
     window.console.log(event)
   },

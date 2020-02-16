@@ -43,7 +43,7 @@ return{
 
 }
 },
-    created:{
+created:{
   fun(){
     localStorage.setItem('active',0)
     localStorage.setItem('done',1)
