@@ -8,7 +8,7 @@
     <a @click="pushSchool" v-if="active1">+Add another School</a>
     <div class="d1">
       <button @click="$router.push('/sample')"> Prev</button>
-      <button>Next</button>
+      <button :disabled="Flag" @click="nextPage">Next</button>
     </div>
     
   </main>
@@ -34,7 +34,8 @@ data () {
         workHistory:[],
         active:false,
         active1:false,
-        EduHistory:[]
+        EduHistory:[],
+        Flag:true,
 
 
       }
@@ -54,7 +55,7 @@ pushSchool(){
     School:""
     
   })
-  this.active1=false
+  this.active1=true
   
 },
 validation(value){
@@ -68,7 +69,7 @@ for(var i=0;i<this.workHistory.length;i++){
   else
   this.active=false
   this.workHistory=[]
-  
+  this.Flag=false
 }
 
 },
@@ -83,9 +84,14 @@ for(var i=0;i<this.EduHistory.length;i++){
   else
   this.active1=false
   this.EduHistory=[]
+  this.Flag=false
   
 }
+},
+nextPage(){
+  this.$router.push('/expertise')
 }
+
     },
 
 

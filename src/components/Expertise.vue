@@ -14,7 +14,7 @@
     </div>
    <div class="d1">
       <button @click="$router.push('/profile')"> Prev</button>
-      <button @click="$router.push('/interview')">Next</button>
+      <button @click="nextPage">Next</button>
     </div>
  
    
@@ -59,6 +59,10 @@ methods:{
     this.Subjects=[]
     for(var i=0;i<this.Language.length;i++)
     this.Subjects.push(this.Language[i])
+  },
+  nextPage(){
+    localStorage.setItem('done',3)
+    this.$router.push('/interview')
   }
 },
 components:{

@@ -9,14 +9,14 @@
       </div>
       <div class="line">
       </div>
-      <Answer class="ans" v-bind:Answers="questions"></Answer> 
+      <Answer @answers="checkAns($event)" class="ans" v-bind:Answers="questions"></Answer> 
     </div>
-
-    <li style="color:orange;font-size:14px" @click="Next">Next Question</li>
-
+    <ul>
+    <li style="color:orange;font-size:14px;list-style-type:none;text-align:start;margin-left:35%" @click="Next">Next Question</li>
+    </ul>
     <div class="d1">
       <button @click="$router.push('/expertise')" class="b1">Prev</button>
-      <button class="b2">Submit</button>
+      <button :disabled="this.length<4" class="b2" @click="$router.push('/thanks')">Submit</button>
     </div>
   </main>
 </template>
@@ -30,7 +30,9 @@ data:function(){
     QuestionList:['What is Lorem Ipsum','What is Information Technology','Which data structure is used for detecting loop in linked list','Why Java is platform independent'],
     questions:['What is Lorem Ipsum'],
     number:0,
-    count:0
+    count:0,
+    answers:[],
+    length:0
   }
 },
 components:{
@@ -52,6 +54,11 @@ methods:{
    this.count++;
    if(this.count>3)
    this.count=0;
+ },
+ checkAns(value){
+  this.answers=value
+  this.length=this.answers.length
+
  }
 },
 created:{
@@ -69,10 +76,13 @@ created:{
   display:flex;
   flex-wrap: wrap;
   justify-content: start; 
+ 
 }
-li{
+.container .questions {
+  li{
   list-style-type: none;
   margin-bottom: 10px;
+  }
 }
 .fa-check{
     color:orange ;
@@ -85,6 +95,7 @@ li{
 .line{
   border-left: 1px solid #ddd;
   margin-right: 80px;
+
 
 }
 .ans{

@@ -3,7 +3,7 @@
     <!-- <div class="questions"> -->
       <div v-for="question in Answers" v-bind:key="question">
          <p>{{question}}</p>
-         <textarea cols="34"></textarea>
+         <textarea @blur="send" v-model="ans" cols="34" rows="5"></textarea>
       </div>
     <!-- </div> -->
   </main>
@@ -11,7 +11,22 @@
 
 <script>
 export default {
-props:['Answers']
+  data:function(){
+    return{
+      ans:'',
+      answers:[]
+    }
+  },
+props:['Answers'],
+methods:{
+  send(){
+    if(this.ans!=='')
+    this.answers.push(this.ans)
+    this.ans=''
+    if(this.answers.length==4)
+    this.$emit('answers',this.answers)
+  }
+}
 }
 </script>
 
@@ -19,6 +34,7 @@ props:['Answers']
 textarea{
     resize: none;
     text-align: left;
+    display: flex;
     
   
 }
