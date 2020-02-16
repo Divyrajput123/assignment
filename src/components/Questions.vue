@@ -1,0 +1,117 @@
+<template>
+  <main>
+    <div class="container">
+      <div class="questions">
+       <li @click="question(0)" >1.  Question#1<span v-show="number==0"><i :class="{active :number==0}" class="fas fa-check"></i></span></li> 
+       <li @click="question(1)" >2.  Question#2 <span v-show="number==1"><i :class="{active: number==1}"  class="fas fa-check"></i></span></li>
+       <li @click="question(2)" >3.  Question#3 <span v-show="number==2"><i :class="{active: number==2}" class="fas fa-check"></i></span></li>
+       <li @click="question(3)" >4.  Question#4 <span v-show="number==3"><i :class="{active: number==3}" class="fas fa-check"></i></span></li>
+      </div>
+      <div class="line">
+      </div>
+      <Answer class="ans" v-bind:Answers="questions"></Answer> 
+    </div>
+
+    <li style="color:orange;font-size:14px" @click="Next">Next Question</li>
+
+    <div class="d1">
+      <button @click="$router.push('/expertise')" class="b1">Prev</button>
+      <button class="b2">Submit</button>
+    </div>
+  </main>
+</template>
+
+<script>
+localStorage.setItem('number',-1)
+import Answer from '../components/Answers.vue'
+export default {
+data:function(){
+  return{
+    QuestionList:['What is Lorem Ipsum','What is Information Technology','Which data structure is used for detecting loop in linked list','Why Java is platform independent'],
+    questions:['What is Lorem Ipsum'],
+    number:0,
+    count:0
+  }
+},
+components:{
+ Answer
+},
+methods:{
+ question(e){
+   this.number=e
+   localStorage.setItem('number',e)
+   window.console.log(e)
+   this.questions=[]
+  this.questions.push(this.QuestionList[e])
+  
+ },
+ Next(){
+   this.number=this.count
+   this.questions=[]
+   this.questions.push(this.QuestionList[this.count])
+   this.count++;
+   if(this.count>3)
+   this.count=0;
+ }
+},
+created:{
+  fun(){
+    localStorage.setItem('number',0)
+  }
+}
+}
+</script>
+
+<style scoped lang="scss">
+
+.container{
+  margin-top:90px;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: start; 
+}
+li{
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+.fa-check{
+    color:orange ;
+  }
+
+.questions{
+  margin:0px 40px;
+  
+}
+.line{
+  border-left: 1px solid #ddd;
+  margin-right: 80px;
+
+}
+.ans{
+ top:0px;
+}
+.d1{
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 40px;
+  width:100%;
+.b1 {
+      background-color: orange;
+      border-radius: 12px;
+      width: 76px;
+      height: 25px;
+      outline: none;
+    }
+.b2{
+      background-color:rgb(31, 207, 31);
+      border-radius: 12px;
+      width: 76px;
+      height: 25px;
+      outline: none;
+}
+
+    
+
+}
+</style>

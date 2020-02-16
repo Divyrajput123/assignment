@@ -12,3 +12,36 @@ h1{
     color:$color;
   }
 }
+@mixin EduPro(){
+  main{
+    max-width: 400px;
+    position: relative;
+    margin: auto;
+  
+  label{
+    font-size: 14px;
+    position: absolute;
+    right:350px;
+  }
+  input{
+    width: 57%;
+  }
+  select{
+    height: 30px;
+    margin: 10px 40px; 
+  }  
+}
+}
+@mixin CommonButton{
+ 
+    display: flex;
+   
+    button{
+      background-color: orange;
+      border-radius: 12px;
+      width: 76px;
+      height: 25px;
+      outline: none;
+    }
+  
+}
