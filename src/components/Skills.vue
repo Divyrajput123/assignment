@@ -39,7 +39,7 @@ position: relative;
 
 }
 input{
-  margin: 20px 40px;
+  margin: 20px 16px;
  
 }
 input[type=checkbox]{
@@ -71,6 +71,7 @@ input[type=checkbox]:checked:before{
 }
 .sub{
   display: flex;
+  margin-right: 20px;
 }
 
 

@@ -74,8 +74,10 @@ methods:{
       window.alert('some fields are still empty')
       this.dataStore.clear()
     }
-     if(this.flag==true)
+     if(this.flag==true){
       this.$router.push('/profile')
+      localStorage.setItem('active',2)
+     }
     }
 },
 

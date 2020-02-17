@@ -9,11 +9,14 @@
       </div>
       <div class="line">
       </div>
-      <Answer @answers="checkAns($event)" class="ans" v-bind:Answers="questions"></Answer> 
+      <Answer @answers="checkAns($event)"  v-bind:Answers="questions"></Answer> 
     </div>
-    <ul>
-    <li style="color:orange;font-size:14px;list-style-type:none;text-align:start;margin-left:39%" @click="Next">Next Question</li>
-    </ul>
+
+    <div class="preNe" style="display:flex;flex-wrap:wrap">
+       <li v-if="count>=1" style="color:orange;font-size:14px;list-style-type:none;text-align:start;margin-left:336px;" @click="Prev">Prev Question</li>
+       <li v-if="count<=3" style="color:orange;font-size:14px;list-style-type:none;margin-left:767px" @click="Next">Next Question</li>
+    </div>
+
     <div class="d1">
       <button @click="$router.push('/expertise')" class="b1">Prev</button>
       <button :disabled="this.length<4" class="b2" @click="$router.push('/thanks')">Submit</button>
@@ -54,15 +57,27 @@ methods:{
    this.questions=[]
    this.questions.push(this.QuestionList[this.count])
    this.count++;
-   if(this.count>3)
-   this.count=0;
+
  },
  checkAns(value){
   this.answers=value
   this.length=this.answers.length
 
- }
+ },
+ Prev(){
+   
+  if(this.count==4)
+   this.count=this.count-2
+  else
+   this.count=this.count-1
+
+   this.questions=[]
+   this.number=this.count
+   this.questions.push(this.QuestionList[this.count])
+  
+}
 },
+
 }
 </script>
 
@@ -96,9 +111,9 @@ methods:{
   border-left: 1px solid #ddd;
   margin-right: 80px;
 }
-.ans{
- top:0px;
-}
+// .ans{
+//  top:0px;
+// }
 .d1{
   position: absolute;
   display: flex;

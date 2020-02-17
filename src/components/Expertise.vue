@@ -62,10 +62,11 @@ methods:{
     this.Subjects.push(this.Language[i])
   },
   nextPage(){
-    localStorage.setItem('done',3)
+    // localStorage.setItem('done',3)
+    localStorage.setItem('active',4)
     this.$router.push('/interview')
   },
-  updateSKill(value){
+  updateSkill(value){
     this.skills.push(value)
   }
 },

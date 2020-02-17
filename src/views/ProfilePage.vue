@@ -92,6 +92,7 @@ for(var i=0;i<this.EduHistory.length;i++){
 nextPage(){
   if(this.text.length!==0){
     window.console.log(this.text.length)
+    localStorage.setItem('active',3)
   this.$router.push('/expertise')
   }
   else

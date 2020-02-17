@@ -3,7 +3,7 @@
     <!-- <div class="questions"> -->
       <div v-for="question in Answers" v-bind:key="question">
          <p>{{question}}</p>
-         <textarea @blur="send" v-model="ans" cols="34" rows="5"></textarea>
+         <textarea @blur="send" v-model="ans" cols="85" rows="5"></textarea>
       </div>
     <!-- </div> -->
   </main>
@@ -40,5 +40,7 @@ textarea{
 }
 p{
 text-align: left;
+margin-top: 0px;
 }
+
 </style>
