@@ -3,10 +3,10 @@
     
     <div class="d">
    <div class="sidenav">
-     <a @click="computerScience">Computer Science</a>
-     <a @click="computerSoftware">Computer Software</a>
-     <a @click="engineering">Engineering</a>
-     <a @click="language">Language</a>
+     <a @click="computerScience" >Computer Science</a>
+     <a @click="computerSoftware" >Computer Software</a>
+     <a @click="engineering" >Engineering</a>
+     <a @click="language" >Language</a>
    </div>
    <div class="subjects">
     <Skills @skillUpdate="updateSkill($event)" v-bind:Subjects="Subjects"  v-bind:FLag="Flag"></Skills>
@@ -33,29 +33,34 @@ data:function(){
     Language:['Hindi','English','Tamil','Telugu','Kannad'],
     Subjects:[],
     Flag:0,
-    skills:[]
+    skills:[],
+    act:0
   }
 },
 methods:{
   computerScience(){
+    this.act=1
     this.Flag=0
     this.Subjects=[]
     for(var i=0;i<this.ComputerScience.length;i++)
     this.Subjects.push(this.ComputerScience[i])
   },
   computerSoftware(){
+    this.act=2
    this.Flag=1
    this.Subjects=[]
    for(var i=0;i<this.ComputerSoftware.length;i++)
     this.Subjects.push(this.ComputerSoftware[i])
   },
   engineering(){
+    this.act=3
     this.Flag=2
     this.Subjects=[]
     for(var i=0;i<this.Engineering.length;i++)
     this.Subjects.push(this.Engineering[i])
   },
   language(){
+    this.act=4
     this.Flag=3
     this.Subjects=[]
     for(var i=0;i<this.Language.length;i++)
@@ -101,29 +106,11 @@ Skills
   background-color:white;
   border-left:5px solid orange;
 }
-/* @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-} */
-/* .subjects{
-display: flex;
-flex-wrap: wrap;
-margin: auto
-
-
-
-
-} */
-// main{
-//   display: flex;
-//   flex-wrap: wrap;
-//   flex-direction: row;
+// .sidenav a:active {
+//   color: black;
+//   background-color:white;
+//   border-left:5px solid orange;  
 // }
-a:active{
-  color: black;
-  background-color:white;
-  border-left:5px solid orange;  
-}
 .d1{ 
    position: absolute;
    display:flex;
