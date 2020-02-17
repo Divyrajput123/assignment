@@ -11,7 +11,8 @@ import Progressbar from '../components/Progressbar.vue'
 export default {
 components:{
   Questions,Progressbar
-}
+},
+
 }
 </script>
 
