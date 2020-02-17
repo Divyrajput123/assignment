@@ -61,11 +61,11 @@ methods:{
 
  }
 },
-created:{
-  fun(){
-    localStorage.setItem('number',0)
-  }
-}
+// created:{
+//   fun(){
+//     localStorage.setItem('number',0)
+//   }
+// }
 }
 </script>
 
@@ -89,7 +89,7 @@ created:{
   }
 
 .questions{
-  margin:0px 40px;
+  margin:0px 70px;
   
 }
 .line{

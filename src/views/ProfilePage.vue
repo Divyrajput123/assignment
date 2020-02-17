@@ -90,7 +90,12 @@ for(var i=0;i<this.EduHistory.length;i++){
 }
 },
 nextPage(){
+  if(this.text.length!==0){
+    window.console.log(this.text.length)
   this.$router.push('/expertise')
+  }
+  else
+  this.Flag=false
 },
 texts(value){
 this.text=value

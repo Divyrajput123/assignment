@@ -3,7 +3,6 @@
   <main>
     <progressbar></progressbar>
     <Form @update="validation($event)" v-bind:placeholder="placeholder" v-bind:label="label" v-bind:type="type"></Form>
-
   </main>
 </template>
 

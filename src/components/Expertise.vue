@@ -9,12 +9,12 @@
      <a @click="language">Language</a>
    </div>
    <div class="subjects">
-    <Skills v-bind:Subjects="Subjects"  v-bind:FLag="Flag"></Skills>
+    <Skills @skillUpdate="updateSkill($event)" v-bind:Subjects="Subjects"  v-bind:FLag="Flag"></Skills>
    </div>
     </div>
    <div class="d1">
       <button @click="$router.push('/profile')"> Prev</button>
-      <button @click="nextPage">Next</button>
+      <button :disabled="skills.length<=0" @click="nextPage">Next</button>
     </div>
  
    
@@ -32,7 +32,8 @@ data:function(){
     Engineering:['NodeJS','ExpressJS','SQL','C++','Assembly Language','Database','MySQL','AngualarJS','Web Development','CSS','Heroku'],
     Language:['Hindi','English','Tamil','Telugu','Kannad'],
     Subjects:[],
-    Flag:0
+    Flag:0,
+    skills:[]
   }
 },
 methods:{
@@ -63,6 +64,9 @@ methods:{
   nextPage(){
     localStorage.setItem('done',3)
     this.$router.push('/interview')
+  },
+  updateSKill(value){
+    this.skills.push(value)
   }
 },
 components:{

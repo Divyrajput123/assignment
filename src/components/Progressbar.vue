@@ -43,12 +43,12 @@ return{
 
 }
 },
-created:{
-  fun(){
-    localStorage.setItem('active',0)
-    localStorage.setItem('done',1)
-  }
-}
+// created:{
+//   fun(){
+//     localStorage.setItem('active',0)
+//     localStorage.setItem('done',1)
+//   }
+// }
 }
 </script>
 
