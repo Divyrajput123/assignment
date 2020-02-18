@@ -1,25 +1,25 @@
 <template>
   <main>
-    <div class="container">
-      <div class="questions">
+    <div class="container containermod">
+      <div class="container container--questions">
        <li @click="question(0)" >1.  Question#1<span v-if="number>=0"><i :class="{active :number>=0}" class="fas fa-check"></i></span></li> 
        <li @click="question(1)" >2.  Question#2 <span v-if="number>=1"><i :class="{active: number>=1}"  class="fas fa-check"></i></span></li>
        <li @click="question(2)" >3.  Question#3 <span v-if="number>=2"><i :class="{active: number>=2}" class="fas fa-check"></i></span></li>
        <li @click="question(3)" >4.  Question#4 <span v-if="number>=3"><i :class="{active: number>=3}" class="fas fa-check"></i></span></li>
       </div>
-      <div class="line">
+      <div class="container container--line">
       </div>
       <Answer @answers="checkAns($event)"  v-bind:Answers="questions"></Answer> 
     </div>
 
-    <div class="preNe" style="display:flex;flex-wrap:wrap">
+    <div class="twobutton twobutton-preNe" style="display:flex;flex-wrap:wrap">
        <li v-if="count>=1" style="color:orange;font-size:14px;list-style-type:none;text-align:start;margin-left:336px;" @click="Prev">Prev Question</li>
        <li v-if="count<=3" style="color:orange;font-size:14px;list-style-type:none;margin-left:767px" @click="Next">Next Question</li>
     </div>
 
-    <div class="d1">
-      <button @click="$router.push('/expertise')" class="b1">Prev</button>
-      <button :disabled="this.length<4" class="b2" @click="$router.push('/thanks')">Submit</button>
+    <div class="navigate navigate--d1">
+      <button @click="prevQ" class="navigate navigate__button1">Prev</button>
+      <button :disabled="this.length<4" class="navigate navigate__button2" @click="$router.push('/thanks')">Submit</button>
     </div>
   </main>
 </template>
@@ -75,6 +75,10 @@ methods:{
    this.number=this.count
    this.questions.push(this.QuestionList[this.count])
   
+},
+prevQ(){
+  localStorage.setItem('active',3)
+  this.$router.push('/expertise')
 }
 },
 
@@ -83,17 +87,18 @@ methods:{
 
 <style scoped lang="scss">
 
-.container{
+.containermod{
   margin-top:90px;
   display:flex;
   flex-wrap: wrap;
   justify-content: start; 
  
 }
-.container .questions {
+.container--questions {
   li{
   list-style-type: none;
   margin-bottom: 10px;
+  
   }
 }
 .fa-check{
@@ -103,31 +108,31 @@ methods:{
 .active{
   color:orange;
     }
-.questions{
+.container--questions{
   margin:0px 70px;
   
 }
-.line{
+.container--line{
   border-left: 1px solid #ddd;
   margin-right: 80px;
 }
 // .ans{
 //  top:0px;
 // }
-.d1{
+.navigate--d1{
   position: absolute;
   display: flex;
   justify-content: space-between;
   bottom: 40px;
   width:100%;
-.b1 {
+.navigate__button1 {
   background-color: orange;
   border-radius: 12px;
   width: 76px;
   height: 25px;
   outline: none;
     }
-.b2{
+.navigate__button2{
   background-color:rgb(31, 207, 31);
   border-radius: 12px;
   width: 76px;

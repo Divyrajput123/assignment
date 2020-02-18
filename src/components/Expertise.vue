@@ -1,24 +1,20 @@
 <template>
   <main>
-    
-    <div class="d">
-   <div class="sidenav">
-     <a @click="computerScience" >Computer Science</a>
-     <a @click="computerSoftware" >Computer Software</a>
-     <a @click="engineering" >Engineering</a>
-     <a @click="language" >Language</a>
-   </div>
-   <div class="subjects">
-    <Skills @skillUpdate="updateSkill($event)" v-bind:Subjects="Subjects"  v-bind:FLag="Flag"></Skills>
-   </div>
+    <div class="courses courses--select">
+       <div class="courses courses--sidenav">
+         <a @click="computerScience" >Computer Science</a>
+         <a @click="computerSoftware" >Computer Software</a>
+         <a @click="engineering" >Engineering</a>
+         <a @click="language" >Language</a>
+       </div>
+       <div class="subjects subject--select">
+         <Skills @skillUpdate="updateSkill($event)" v-bind:Subjects="Subjects"  v-bind:FLag="Flag"></Skills>
+       </div>
     </div>
-   <div class="d1">
-      <button @click="$router.push('/profile')"> Prev</button>
+    <div class="navigate navigate--button">
+      <button @click="prev"> Prev</button>
       <button :disabled="skills.length<=0" @click="nextPage">Next</button>
     </div>
- 
-   
-  
   </main>
 </template>
 
@@ -73,6 +69,10 @@ methods:{
   },
   updateSkill(value){
     this.skills.push(value)
+  },
+  prev(){
+    localStorage.setItem('active',2)
+    this.$router.push('/profile')
   }
 },
 components:{
@@ -83,17 +83,15 @@ Skills
 
 <style scoped lang="scss">
 @import "../styles/my-styles.scss";
-.sidenav {
-  // height: 100%;
+.courses--sidenav {
   width: 25%;
   position: relative;
   z-index: 1;
- 
   left: 0;
   overflow-x: hidden;
   padding-top: 20px;
 }
-.sidenav a {
+.courses--sidenav a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 15px;
@@ -101,7 +99,7 @@ Skills
   display: block;
   border:1px solid#ddd;
 }
-.sidenav a:hover {
+.courses--sidenav a:hover {
   color: black;
   background-color:white;
   border-left:5px solid orange;
@@ -111,7 +109,7 @@ Skills
 //   background-color:white;
 //   border-left:5px solid orange;  
 // }
-.d1{ 
+.navigate--button{ 
    position: absolute;
    display:flex;
   @include CommonButton;
@@ -119,7 +117,7 @@ Skills
    width: 90%;
    bottom: 40px;
 }
-.d{
+.courses--select{
   display: flex;
   position: relative;
   bottom: 20px;

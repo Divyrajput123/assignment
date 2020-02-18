@@ -1,11 +1,11 @@
 <template>
   <main>
-    <div class="container">
-      <ul class="progressbar">
-        <li @click="activate(1)" :class="{ active : active_el == 1 ,activate:active_el>1,done:this.done>1}" >PERSONAL INFO</li>
-        <li @click="activate(2)" :class="{ active : active_el == 2,activate:active_el>2,done:this.done>2}">PROFILE</li>
-        <li @click="activate(3)" :class="{ active : active_el == 3 ,activate:active_el>3,done:this.done>3}">EXPERTISE</li>
-        <li @click="activate(4)" :class="{ active : active_el == 4 ,activate:active_el>4,done:this.done>4}">INTERVIEW</li><br>
+    <div class="container containermod">
+      <ul class="container container--progressbar">
+        <li @click="activate(1)" :class="{ active : active_el == 1 ,activate:done>1,done:this.done>1}" >PERSONAL INFO</li>
+        <li @click="activate(2)" :class="{ active : active_el == 2,activate:done>2,done:this.done>2}">PROFILE</li>
+        <li @click="activate(3)" :class="{ active : active_el == 3 ,activate:done>3,done:this.done>3}">EXPERTISE</li>
+        <li @click="activate(4)" :class="{ active : active_el == 4 ,activate:done>4,done:this.done>4}">INTERVIEW</li><br>
       </ul>
     </div>
   </main>
@@ -43,23 +43,34 @@ return{
 
 }
 },
-// created:{
-//   fun(){
-//     localStorage.setItem('active',0)
-//     localStorage.setItem('done',1)
-//   }
-// }
+created:function(){
+  window.console.log(localStorage.getItem('active'))
+  this.active_el=localStorage.getItem('active')
+ if(this.active_el==1){
+    this.$router.push('/sample')
+  }
+   if(this.active_el==2){
+    this.$router.push('/profile')
+  }
+  else if(this.active_el==3){
+  this.$router.push('/expertise')
+  }
+  else if(this.active_el==4){
+  this.$router.push('/interview')
+  }
+  
+}
 }
 </script>
 
 <style scoped lang="scss">
-.container{
+.containermod{
   width: 100%; 
 }
-.progressbar{
+.container--progressbar{
   counter-reset: step;
 }
- .progressbar li{
+.container--progressbar li{
   list-style-type: none;
   position: relative;
   float: left;
@@ -70,7 +81,7 @@ return{
 
 }
 
-.progressbar li:before{
+.container--progressbar li:before{
   content:counter(step);
   counter-increment: step;
   border:1px solid #ddd;
@@ -83,7 +94,7 @@ return{
   background-color: white;
   text-align: center;
 }
-.progressbar li:after{
+.container--progressbar li:after{
   width: 100%;
   top:15px;
   position:absolute;
@@ -95,13 +106,13 @@ return{
   
    
 }
-.progressbar li:first-child:after{
+.container--progressbar li:first-child:after{
   content: none;
 }
-.progressbar li.active{
+.container--progressbar li.active{
   font-weight: bold;
 } 
-.progressbar li.active::before{
+.container--progressbar li.active::before{
   border-color: orange;
   background-color: orange;
   color: white;
@@ -111,12 +122,10 @@ return{
 //   border-bottom: 1px dotted orange;
   
 // } 
-.progressbar li.activate+li:after{
+.container--progressbar li.activate+li:after{
   border-bottom: 1px dotted orange;
-  
-  
 }
-.progressbar li.done:before{
+.container--progressbar li.done:before{
       content: "✓";
       color: orange;
       font-size: 20px;

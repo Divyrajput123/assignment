@@ -1,7 +1,7 @@
 <template>
   <main>
-    <div class="container">
-     <div class="sub" v-for="item in Subjects" v-bind:key="item" >
+    <div class="container container--mod">
+     <div class="container container--sub" v-for="item in Subjects" v-bind:key="item" >
        <input  type="checkbox" :value="item" @change="pushSkills($event)">
        <label class="contain" for="checkbox">{{item}}</label>
      </div>
@@ -14,33 +14,29 @@
 <script>
 export default {
  data:function(){
-  return{
-    
+  return{  
   }
  },
  props:['Subjects','Flag'],
  methods:{
-   pushSkills(event){
+     pushSkills(event){
      this.$emit('skillUpdate',event.target.value)
    }
  }
-}
+ }
 </script>
 
 <style scoped lang="scss">
 
-.container{
+.container--mod{
  max-width: 60%;
  display: flex;
  flex-wrap: wrap;
-margin-left: 30%;
-position: relative;
-
-
+ margin-left: 30%;
+ position: relative;
 }
 input{
   margin: 20px 16px;
- 
 }
 input[type=checkbox]{
   -webkit-appearance: none;
@@ -56,7 +52,7 @@ input[type=checkbox]{
 }
 input[type=checkbox]:checked{
   border: solid 2px orange;
-   background-color: orange;
+  background-color: orange;
 }
 input[type=checkbox]:checked:before{
   content:"\2713";
@@ -69,7 +65,7 @@ input[type=checkbox]:checked:before{
   font-weight: bold;
  
 }
-.sub{
+.container--sub{
   display: flex;
   margin-right: 20px;
 }

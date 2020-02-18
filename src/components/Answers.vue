@@ -1,11 +1,9 @@
 <template>
   <main>
-    <!-- <div class="questions"> -->
       <div v-for="question in Answers" v-bind:key="question">
          <p>{{question}}</p>
          <textarea @blur="send" v-model="ans" cols="85" rows="5"></textarea>
       </div>
-    <!-- </div> -->
   </main>
 </template>
 
@@ -34,9 +32,7 @@ methods:{
 textarea{
     resize: none;
     text-align: left;
-    display: flex;
-    
-  
+    display: flex;  
 }
 p{
 text-align: left;

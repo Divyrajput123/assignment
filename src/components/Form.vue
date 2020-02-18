@@ -1,7 +1,6 @@
 <template>
   <main>
-  
-    <div class="form container">
+    <div class="form form--container">
       <div v-for="(n, index) in placeholder.length" :key="index">
         <span v-if="type[index] !== 'radio'">
           <label>{{ label[index] }}</label>
@@ -9,7 +8,7 @@
         </span>
         <span v-else>
           <label>{{ label[index].lab }}</label>
-          <div class="radio">  
+          <div class="form form--radio">  
             <input @blur="validation($event,type[index])" :type="type[index]" :name="label[index].lab" value="1"><span class="s">{{label[index].name1}}</span>
             <input @blur="validation($event,type[index])" :type="type[index]" :name="label[index].lab" value="2"><span class="s">{{label[index].name2}}</span>
           </div>
@@ -44,26 +43,25 @@ methods:{
 </script>
 
 <style scoped lang="scss">
-.container{
-  position: relative;
-  max-width: 500px;
-  
-  margin:auto;
+   .form--container{
+    position: relative;
+    max-width: 500px;
+    margin:auto;
 }
-input{
-margin: 8px;
+    input{
+      margin: 8px;
+    }
+    label{
+      position: absolute;
+      right:80%;
+      margin: 8px;
+      font-size: 14px;
 }
-label{
-  position: absolute;
-  right:80%;
-  margin: 8px;
-  font-size: 14px;
-}
-.s{
-  font-size: 8px;
-}
+   .s{
+        font-size: 8px;
+     }
 
-input[type='radio']:after {
+    input[type='radio']:after {
         width: 15px;
         height: 15px;
         border-radius: 15px;

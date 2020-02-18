@@ -7,7 +7,7 @@
     <Education @updateEdu="Education($event)" v-bind:school="school"></Education>
     <a @click="pushSchool" v-if="active1">+Add another School</a>
     <div class="d1">
-      <button @click="$router.push('/sample')"> Prev</button>
+      <button @click="prev"> Prev</button>
       <button :disabled="Flag==false" @click="nextPage">Next</button>
     </div>
     
@@ -43,21 +43,19 @@ data () {
       
     },
     methods:{
-pushAttributes(){
-  this.work.push({
-    company:""
+      pushAttributes(){
+      this.work.push({
+      company:""
     
-  }
+    }
   )
-  this.active=false
+      this.active=false
 },
 pushSchool(){
-  this.work.push({
-    School:""
-    
+    this.work.push({
+    School:""   
   })
-  this.active1=true
-  
+  this.active1=true 
 },
 validation(value){
 this.workHistory=value
@@ -76,7 +74,9 @@ window.console.log('validation',this.workHistory.length)
 //   }
 // }
 if(this.workHistory.length==0)
-this.Flag=false
+  this.Flag=false
+else
+  this.active=true
 
 },
 Education(value){
@@ -96,16 +96,16 @@ Education(value){
 //   }
 // }
 if(this.EduHistory.length==0)
-this.Flag=false
+  this.Flag=false
 if(this.text.length==2 && this.EduHistory.length>0 && this.workHistory.length>0)
   this.Flag=true
+  this.active1=true
 },
 nextPage(){
   window.console.log(this.text.length)
   if(this.Flag){
-    // window.console.log(this.text.length)
     localStorage.setItem('active',3)
-  this.$router.push('/expertise')
+    this.$router.push('/expertise')
   }
   else
   this.Flag=false
@@ -115,10 +115,13 @@ this.text=value
 window.console.log('text called',this.text.length)
 if(this.text.length!==2){
   window.console.log('text called',this.text.length)
-this.Flag=false
-
+  this.Flag=false
 }
 
+},
+prev(){
+  localStorage.setItem('active',1)
+  this.$router.push('/sample')
 }
 
     },
