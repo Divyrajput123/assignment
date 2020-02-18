@@ -58,8 +58,10 @@ methods:{
     window.console.log(event)
   },
   setActiveTo(event){
-    this.ActiveTo=event.target.value
-    this.EduHistory.push({'school':this.School,'ActiveFrom':this.ActiveFrom,'ActiveTo':this.ActiveTo})
+     this.ActiveTo=event.target.value
+    if(this.ActiveTo!==0 && this.year!==0){
+    this.EduHistory.push({'school':this.School,'ActiveFrom':this.year,'ActiveTo':this.ActiveTo})
+  }
   },
   send(){
    this.$emit('updateEdu', this.EduHistory)

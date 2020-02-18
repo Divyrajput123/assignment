@@ -51,31 +51,13 @@ methods:{
   margin:auto;
 }
 input{
-  /* width: 60%; */
-
-
-
-
-  margin: 8px;
+margin: 8px;
 }
-/* .radio{
-  display: flex;
-  justify-content:center;
-  align-items: center;
- width:40%;
-  
-} */
-/* input[type='radio']:checked:after {
-  background-color: orange;
-  visibility: visible;
-  
-} */
 label{
   position: absolute;
   right:80%;
-   margin: 8px;
-   font-size: 14px;
-  
+  margin: 8px;
+  font-size: 14px;
 }
 .s{
   font-size: 8px;
@@ -109,13 +91,13 @@ input[type='radio']:after {
         border: 2px solid white;
     }
 @import "../styles/my-styles.scss";
-.d1{
-  @include CommonButton;
-  justify-content:flex-end;
+    .d1{
+      @include CommonButton;
+      justify-content:flex-end;
   
 
- }
- button{
+    }
+button{
      outline: none;
  }
 </style>

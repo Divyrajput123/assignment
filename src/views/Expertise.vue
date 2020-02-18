@@ -3,7 +3,7 @@
     <div class="d2">
       <progressbar></progressbar>
     </div>
-    <div >
+    <div class="d3">
       <expertise ></expertise>
     </div>
 
@@ -22,8 +22,8 @@ export default {
 
 <style scoped lang="scss">
 
-.d2{
-margin: 80px;
+.d3{
+ margin-top: 100px;
 }
 
 

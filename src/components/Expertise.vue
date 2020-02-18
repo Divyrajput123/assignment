@@ -84,7 +84,7 @@ Skills
 <style scoped lang="scss">
 @import "../styles/my-styles.scss";
 .sidenav {
-  height: 100%;
+  // height: 100%;
   width: 25%;
   position: relative;
   z-index: 1;

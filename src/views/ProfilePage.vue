@@ -8,7 +8,7 @@
     <a @click="pushSchool" v-if="active1">+Add another School</a>
     <div class="d1">
       <button @click="$router.push('/sample')"> Prev</button>
-      <button :disabled="Flag" @click="nextPage">Next</button>
+      <button :disabled="Flag==false" @click="nextPage">Next</button>
     </div>
     
   </main>
@@ -35,7 +35,7 @@ data () {
         active:false,
         active1:false,
         EduHistory:[],
-        Flag:true,
+        Flag:false,
         text:[]
 
 
@@ -61,37 +61,49 @@ pushSchool(){
 },
 validation(value){
 this.workHistory=value
-for(var i=0;i<this.workHistory.length;i++){
-  if(this.workHistory[i].company!==' ' && this.workHistory[i].ActiveFrom!==' ' && this.workHistory[i].ActiveTo!==' ')
-  {
-    this.active=true;
-    this.workHistory=[]
-  }
-  else
-  this.active=false
-  this.workHistory=[]
-  this.Flag=false
-}
+window.console.log('validation',this.workHistory.length)
+// for(var i=0;i<this.workHistory.length;i++){
+ 
+//   if(this.workHistory[i].company!==' ' && this.workHistory[i].ActiveFrom!==' ' && this.workHistory[i].ActiveTo!==' ')
+//   {
+//     this.active=true;
+//     this.workHistory=[]
+//   }
+//   else{
+//   this.active=false
+//   this.workHistory=[]
+//   this.Flag=false
+//   }
+// }
+if(this.workHistory.length==0)
+this.Flag=false
 
 },
 Education(value){
   this.EduHistory=value
-for(var i=0;i<this.EduHistory.length;i++){
-  if(this.EduHistory[i].school!==' ' && this.EduHistory[i].ActiveFrom!==' ' && this.EduHistory[i].ActiveTo!==' ')
-  {
-    this.active1=true;
-    this.EduHistory=[]
-  }
-  else
-  this.active1=false
-  this.EduHistory=[]
-  this.Flag=false
-  
-}
+  window.console.log('Education called',this.EduHistory.length)
+// for(var i=0;i<this.EduHistory.length;i++){
+//   if(this.EduHistory[i].school!==' ' && this.EduHistory[i].ActiveFrom!==' ' && this.EduHistory[i].ActiveTo!==' ')
+//   {
+//     this.active1=true;
+//     this.EduHistory=[]
+//   }
+//   else
+//   {
+//   this.active1=false
+//   this.EduHistory=[]
+//   this.Flag=false
+//   }
+// }
+if(this.EduHistory.length==0)
+this.Flag=false
+if(this.text.length==2 && this.EduHistory.length>0 && this.workHistory.length>0)
+  this.Flag=true
 },
 nextPage(){
-  if(this.text.length!==0){
-    window.console.log(this.text.length)
+  window.console.log(this.text.length)
+  if(this.Flag){
+    // window.console.log(this.text.length)
     localStorage.setItem('active',3)
   this.$router.push('/expertise')
   }
@@ -100,8 +112,9 @@ nextPage(){
 },
 texts(value){
 this.text=value
-if(this.text.length!==2|| this.text.length=='undefined'){
-  window.console.log(this.text.length)
+window.console.log('text called',this.text.length)
+if(this.text.length!==2){
+  window.console.log('text called',this.text.length)
 this.Flag=false
 
 }

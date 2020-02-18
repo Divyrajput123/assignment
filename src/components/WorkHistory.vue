@@ -59,8 +59,12 @@ methods:{
     window.console.log(event)
   },
   setActiveTo(event){
+    window.console.log(this.ActiveFrom)
     this.ActiveTo=event.target.value
-    this.workHistory.push({'company':this.company,'ActiveFrom':this.ActiveFrom,'ActiveTo':this.ActiveTo})
+    if(this.ActiveTo!==0  && this.year!==0){
+   
+    this.workHistory.push({'company':this.company,'ActiveFrom':this.year,'ActiveTo':this.ActiveTo})
+  }
   },
   send(){
    this.$emit('updatework', this.workHistory)
