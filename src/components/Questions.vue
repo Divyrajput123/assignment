@@ -2,10 +2,19 @@
   <main>
     <div class="container containermod">
       <div class="container container--questions">
-       <li @click="question(0)" >1.  Question#1<span v-if="number>=0"><i :class="{active :number>=0}" class="fas fa-check"></i></span></li> 
-       <li @click="question(1)" >2.  Question#2 <span v-if="number>=1"><i :class="{active: number>=1}"  class="fas fa-check"></i></span></li>
-       <li @click="question(2)" >3.  Question#3 <span v-if="number>=2"><i :class="{active: number>=2}" class="fas fa-check"></i></span></li>
-       <li @click="question(3)" >4.  Question#4 <span v-if="number>=3"><i :class="{active: number>=3}" class="fas fa-check"></i></span></li>
+        <div class="container container--q1" style="display:flex;width:100%">
+          <li @click="question(0)" >1.Question#1</li>
+          <span v-if="number>=0"><i :class="{active :number>=0}" class="fas fa-check"></i></span>
+        </div>
+        <div class="container container--q1" style="display:flex;width:100%">
+         <li @click="question(1)" >2.Question#2</li><span v-if="number>=1"><i :class="{active: number>=1}"  class="fas fa-check"></i></span>
+        </div>
+        <div class="container container--q1" style="display:flex;width:100%">
+          <li @click="question(2)" >3.Question#3 </li><span v-if="number>=2"><i :class="{active: number>=2}" class="fas fa-check"></i></span>
+        </div>
+        <div class="container container--q1" style="display:flex;width:100%">
+          <li @click="question(3)" >4.Question#4 </li><span v-if="number>=3"><i :class="{active: number>=3}" class="fas fa-check"></i></span>
+        </div>
       </div>
       <div class="container container--line">
       </div>
@@ -30,8 +39,8 @@ import Answer from '../components/Answers.vue'
 export default {
 data:function(){
   return{
-    QuestionList:['What is Lorem Ipsum','What is Information Technology','Which data structure is used for detecting loop in linked list','Why Java is platform independent'],
-    questions:['What is Lorem Ipsum'],
+    QuestionList:[{'index':0,'value':'What is Lorem Ipsum'},{'index':1,'value':'What is Information Technology'},{'index':2,'value':'Which data structure is used for detecting loop in linked list'},{'index':3,'value':'Why Java is platform independent'}],
+    questions:[{'index':0,'value':'What is Lorem Ipsum'}],
     number:localStorage.getItem('number'),
     count:0,
     answers:[],
@@ -49,6 +58,7 @@ methods:{
    localStorage.setItem('number',e)
   window.console.log(e)
    this.questions=[]
+   window.console.log(this.QuestionList[e])
    this.questions.push(this.QuestionList[e])
   
  },
@@ -78,7 +88,11 @@ methods:{
 },
 prevQ(){
   localStorage.setItem('active',3)
+  window.console.log('f',this.$store.index)
+  this.$store.state.index=this.$store.state.counter+1
   this.$router.push('/expertise')
+  window.console.log(this.$store.index)
+
 }
 },
 
@@ -95,11 +109,15 @@ prevQ(){
  
 }
 .container--questions {
+
   li{
   list-style-type: none;
   margin-bottom: 10px;
+  margin-right: 8px;
   
   }
+
+ 
 }
 .fa-check{
   color:#ddd ;
@@ -139,6 +157,12 @@ prevQ(){
   height: 25px;
   outline: none;
 }
+// .container--q1{
+//   display: flex;
+  
+   
+ 
+// }
 
     
 

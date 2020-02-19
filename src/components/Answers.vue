@@ -1,8 +1,10 @@
 <template>
   <main>
-      <div v-for="question in Answers" v-bind:key="question">
-         <p>{{question}}</p>
-         <textarea @blur="send" v-model="ans" cols="85" rows="5"></textarea>
+      <div v-for="(question,index) in Answers" v-bind:key="question">
+         <p>{{Answers[index].value}}</p>
+         <textarea @input="flagchange($event,index)" @change="flagchange($event,index)" @blur="send;flagchange($event,index)" v-model="answers[Answers[index].index]" cols="85" rows="5"></textarea>
+         <p v-if="errors[index].Flag==false" style="color:red;margin-left:19%">{{errors[index].message}}</p>
+ 
       </div>
   </main>
 </template>
@@ -12,17 +14,27 @@ export default {
   data:function(){
     return{
       ans:'',
-      answers:[]
+      answers:[],
+      errors:[{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'}]
     }
   },
 props:['Answers'],
 methods:{
   send(){
-    if(this.ans!=='')
-    this.answers.push(this.ans)
-    this.ans=''
-    if(this.answers.length==4)
+    // if(this.ans!=='')
+    // this.answers.push(this.ans)
+    // this.ans=''
+    // if(this.answers.length==4)
+    // this.flagchange(event,index)
     this.$emit('answers',this.answers)
+   
+  },
+  flagchange($event,index){
+   if(event.target.value!=='')
+    this.errors[index].Flag=true
+   else if(event.target.value=='')
+    this.errors[index].Flag=false
+       
   }
 }
 }

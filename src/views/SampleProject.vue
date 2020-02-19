@@ -1,14 +1,14 @@
 
 <template>
   <main>
-    <progressbar></progressbar>
-    <Form @update="validation($event)" v-bind:placeholder="placeholder" v-bind:label="label" v-bind:type="type"></Form>
+    <!-- <progressbar></progressbar> -->
+    <Form @update="validation($event)" v-bind:placeholder="placeholder" v-bind:label="label" v-bind:type="type" v-bind:errors="errors"></Form>
   </main>
 </template>
 
 <script>
 import Form from '../components/Form.vue'
-import Progressbar from '../components/Progressbar.vue'
+// import Progressbar from '../components/Progressbar.vue'
 export default {
   data(){
     return{
@@ -17,13 +17,14 @@ export default {
     label:['Name','email',{'lab':'Whatareyou?','name1':'University Student','name2':'Professional'},'University','Major','Graduationdate',{'lab':'DoyouhaveataxID','name1':'I have taxID','name2':'I dont have'},'Mobile'],
     dataStore:[],
     flag:true,
-    done:localStorage.getItem('done')
+    done:localStorage.getItem('done'),
+   
     
     }
     
   },
 components:{
-Form,Progressbar
+Form
 },
 methods:{
   validation(value){
@@ -77,6 +78,7 @@ methods:{
      if(this.flag==true){
       this.$router.push('/profile')
       localStorage.setItem('active',2)
+      localStorage.setItem('done',1)
      }
     }
 },

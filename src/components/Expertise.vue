@@ -63,16 +63,20 @@ methods:{
     this.Subjects.push(this.Language[i])
   },
   nextPage(){
-    // localStorage.setItem('done',3)
+    localStorage.setItem('done',4)
     localStorage.setItem('active',4)
+     this.$store.index=this.$store.state.counter++
     this.$router.push('/interview')
+   
   },
   updateSkill(value){
     this.skills.push(value)
   },
   prev(){
     localStorage.setItem('active',2)
+     this.$store.state.index=this.$store.state.counter++
     this.$router.push('/profile')
+   
   }
 },
 components:{

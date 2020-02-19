@@ -1,14 +1,18 @@
 <template>
   <div id="app">
     <h3>Sample Project</h3>
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
+    <progressbar :key="$store.state.index" class="progress"></progressbar>
     <router-view/>
   </div>
 </template>
-
+<script>
+import Progressbar from '../src/components/Progressbar'
+export default {
+  components:{
+    Progressbar
+  }
+}
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -29,5 +33,8 @@
       color: #42b983;
     }
   }
+}
+.progress{
+  margin-bottom: 10%;
 }
 </style>

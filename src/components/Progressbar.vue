@@ -43,23 +43,10 @@ return{
 
 }
 },
-created:function(){
-  window.console.log(localStorage.getItem('active'))
-  this.active_el=localStorage.getItem('active')
- if(this.active_el==1){
-    this.$router.push('/sample')
-  }
-   if(this.active_el==2){
-    this.$router.push('/profile')
-  }
-  else if(this.active_el==3){
-  this.$router.push('/expertise')
-  }
-  else if(this.active_el==4){
-  this.$router.push('/interview')
-  }
-  
-}
+// created:function(){
+//  this.active_el=localStorage.getItem('active')
+//  window.console.log(localStorage.getItem('active'))
+// }
 }
 </script>
 

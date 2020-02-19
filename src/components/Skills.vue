@@ -14,7 +14,8 @@
 <script>
 export default {
  data:function(){
-  return{  
+  return{ 
+     
   }
  },
  props:['Subjects','Flag'],

@@ -1,6 +1,5 @@
 <template>
   <main>
-    <progressbar></progressbar><br>
     <auto-textarea @textUpdate="texts($event)" v-model="inputValue" v-bind:placeholder="placeholder" v-bind:label="label"></auto-textarea>
     <WorkHistory @updatework="validation($event)" v-bind:work="work" class="w"></WorkHistory>
     <a @click="pushAttributes" v-if="active" >+Add another job</a>
@@ -17,12 +16,12 @@
 <script>
 import AutoTextarea from '../components/AutoTextarea.vue'
 import WorkHistory from '../components/WorkHistory.vue'
-import Progressbar from '../components/Progressbar.vue'
+// import Progressbar from '../components/Progressbar.vue'
 import Education from '../components/Education.vue'
 
 export default {
 components:{
-  AutoTextarea,WorkHistory,Progressbar,Education
+  AutoTextarea,WorkHistory,Education
 },
 data () {
       return {
@@ -60,19 +59,6 @@ pushSchool(){
 validation(value){
 this.workHistory=value
 window.console.log('validation',this.workHistory.length)
-// for(var i=0;i<this.workHistory.length;i++){
- 
-//   if(this.workHistory[i].company!==' ' && this.workHistory[i].ActiveFrom!==' ' && this.workHistory[i].ActiveTo!==' ')
-//   {
-//     this.active=true;
-//     this.workHistory=[]
-//   }
-//   else{
-//   this.active=false
-//   this.workHistory=[]
-//   this.Flag=false
-//   }
-// }
 if(this.workHistory.length==0)
   this.Flag=false
 else
@@ -82,19 +68,6 @@ else
 Education(value){
   this.EduHistory=value
   window.console.log('Education called',this.EduHistory.length)
-// for(var i=0;i<this.EduHistory.length;i++){
-//   if(this.EduHistory[i].school!==' ' && this.EduHistory[i].ActiveFrom!==' ' && this.EduHistory[i].ActiveTo!==' ')
-//   {
-//     this.active1=true;
-//     this.EduHistory=[]
-//   }
-//   else
-//   {
-//   this.active1=false
-//   this.EduHistory=[]
-//   this.Flag=false
-//   }
-// }
 if(this.EduHistory.length==0)
   this.Flag=false
 if(this.text.length==2 && this.EduHistory.length>0 && this.workHistory.length>0)
@@ -105,7 +78,9 @@ nextPage(){
   window.console.log(this.text.length)
   if(this.Flag){
     localStorage.setItem('active',3)
+    localStorage.setItem('done',3)
     this.$router.push('/expertise')
+    this.$store.state.index=this.$store.state.counter++
   }
   else
   this.Flag=false
@@ -121,6 +96,7 @@ if(this.text.length!==2){
 },
 prev(){
   localStorage.setItem('active',1)
+  this.$store.state.index=this.$store.state.counter++
   this.$router.push('/sample')
 }
 
