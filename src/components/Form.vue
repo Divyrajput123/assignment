@@ -1,24 +1,39 @@
 <template>
   <main>
     <div class="form form--container">
-      <div v-for="(n, index) in placeholder.length" :key="index">
-        <span v-if="type[index] !== 'radio'">
+      <div  v-for="(n, index) in placeholder.length" :key="index">
+        <div class="form form--rad" v-if="type[index] !== 'radio' && type[index] !== 'date'" >
           <label>{{ label[index] }}</label>
-          <input @input="flagchange($event,index)" @blur="validation($event,type[index],index)" @click="flagchange($event,index)" @change="flagchange($event,index)" v-on:keyup.delete="flagchange($event,index)" :type="type[index]" :placeholder="placeholder[index]">
+          <input @input="flagchange($event,index)" v-model="Answers[index]" @change="flagchange($event,index)" v-on:keyup.delete="flagchange($event,index)" :type="type[index]" :placeholder="placeholder[index]">
           <p v-show="errors[index].Flag==false " style="color:red;font-size:12px">{{errors[index].message}}</p>
-        </span>
-        <span v-else>
-          <label>{{ label[index].lab }}</label>
-          <div class="form form--radio">  
-            <input @click="flagchange($event,index)" @change="flagchange($event,index)" @blur="validation($event,type[index],index)" :type="type[index]" :name="label[index].lab" value="1"><span class="s">{{label[index].name1}}</span>
-            <input @click="flagchange($event,index)" @change="flagchange($event,index)" @blur="validation($event,type[index],index)" :type="type[index]" :name="label[index].lab" value="2"><span class="s">{{label[index].name2}}</span>
+        </div>
+        <div class="form form--rad" v-else-if="type[index]=='date'" >
+         <label>{{ label[index] }}</label>
+         <select @input="flagchange($event,index)" @change="flagchange($event,index)" v-model="Answers[index]" >
+          <option value="0">2015</option>
+          <option v-for="year in years" :value="year" v-bind:key="year"  >{{ year }}</option>
+         </select>
+          <p v-show="errors[index].Flag==false " style="color:red;font-size:12px">{{errors[index].message}}</p>
+        </div> 
+        <div class="form form--rad" v-else> 
+          <div class="form form--contain">
+           <label class="form form--l1" >{{ label[index].lab }}</label>
+           <div class="form form--de">
+            <input v-model="Answers[index]" class="form form--i1" @click="flagchange($event,index)" @change="flagchange($event,index)"  :type="type[index]" :name="label[index].lab" value="1">
+            <label class="form form--l2">{{label[index].name1}}</label>
+           </div>
+           <div class="form form--dena">
+            <input v-model="Answers[index]" class="form form--i2" @click="flagchange($event,index)" @change="flagchange($event,index)"  :type="type[index]" :name="label[index].lab" value="2">
+            <label class="form form--l3">{{label[index].name2}}</label>
+           </div>
           </div>
-          <p v-show="errors[index].Flag==false" style="color:red;font-size:12px">{{errors[index].message}}</p>
-        </span> 
+            <p v-show="errors[index].Flag==false" style="color:red;font-size:12px">{{errors[index].message}}</p>
+        </div>
+          
       </div>
     </div>
     <div class="navigate--d1">
-      <button :disabled="this.dataStore.length<8" @click="send" class="navigate--button1">Next</button>
+      <button id="mybtn" :disabled="!disabled" @click="nextPage" class="navigate--button1">Next</button>
     </div>
   </main>
 </template>
@@ -28,37 +43,115 @@ export default {
 props:['placeholder','type','label'],
 data:function(){
   return{
-    dataStore:[],
     value:'',
     typeOf:'',
     nam:'n1',
-    errors:[{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'},{'Flag':false,'message':'Field must be selected'},{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'}],
-    emailValid:'The email format is incorrect'
+    errors:[{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field must be selected'},{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'},{'Flag':true,'message':'Field cant be empty'}],
+    bool:true,
+    flag:false,
+    Answers:[],
+    year:0
 
   }
 },
 methods:{
-  validation(event,typ,index){
-  
-    if(this.dataStore.indexOf(event.target.value)==-1 )
-      this.dataStore[index]={'value':event.target.value,'type':typ}
-    else
-      this.dataStore.push({'value':event.target.value,'type':typ})
-      window.console.log(event.target.value,index,this.dataStore.length)
-  },
-  send(){
-    this.$emit('update', this.dataStore)
-    this.$store.state.index=this.$store.state.index++
-    localStorage.setItem('done',)
-  },
   flagchange(event,index){
-    window.console.log(event.target.value)
-    if(event.target.value!=='')
-      this.errors[index].Flag=true
-    else if(event.target.value=='')
-      this.errors[index].Flag=false
+    if(index==5)
+    this.year=parseInt(event.target.value);
+    if(index==1 && event.target.value.length!==0)
+    {
+       const re=/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       if(re.test(event.target.value)==false)
+       {
+         this.errors[index].message='email format is incorrect'
+         this.errors[index].Flag=false
+
+       }
+       else{
+         this.errors[index].message='Field cant be empty'
+         this.errors[index].Flag=true
+         this.bool = true
+       }
+    }
+    else if(index==7)
+      {
+        if(event.target.value.length===10 )
+          {  this.errors[index].message='Field cant be empty'
+             this.errors[index].Flag=true
+             this.bool = true
+          }
+        else{
+          this.errors[index].message='incorrect mobile no'
+          this.errors[index].Flag=false
+       }
+       
+      }
+else{
+  if(event.target.value.length==0)
+    this.errors[index].Flag=false
+  else {
+    this.bool = true
+    this.errors[index].Flag=true
 
   }
+  }
+  // else
+  //  this.errors[index].Flag=true
+  this.$watch.handler
+  
+  },
+  nextPage()
+  { localStorage.setItem('active',2)
+    localStorage.setItem('done',2)
+    this.$store.state.index=this.$store.state.counter++;
+    this.$router.push('/profile')
+  }
+},
+watch:{
+  errors:{
+    handler:function(val,old){
+      
+     for(var i=0;i<8;i++)
+     {  window.console.log('error',this.errors[i].Flag)
+       if(this.errors[i].Flag==false){
+        this.bool=false
+       }
+
+     }
+     
+     if(this.bool==false){
+      this.flag=false
+     }
+     else{
+      this.flag=true
+     }
+window.console.log('hello',old,this.flag)
+  },
+  deep: true
+  }
+},
+computed:{
+  disabled () {
+    // eslint-disable-next-line no-debugger
+    debugger
+    if(this.Answers.length==0)
+      return false
+    for(var i=0;i<8;i++)
+    {
+      if(this.Answers[i]==' ')
+      return false
+    }
+    window.console.log('')
+    return this.flag    
+    },
+   years() {
+     
+      const year1 = new Date().getFullYear()
+      return Array.from({length: year1 - 2015}, (value, index) => year1 + index)
+    }
+
+  
+
 }
 }
 </script>
@@ -67,47 +160,52 @@ methods:{
    .form--container{
     position: relative;
     max-width: 500px;
-    margin:auto;
+    margin-left:22%;
 }
     input{
-      margin: 8px;
+      // margin: 8px;
+      width: 60%;
+      height:18px;
+      
     }
     label{
-      position: absolute;
-      right:80%;
-      margin: 8px;
-      font-size: 14px;
+      // position: absolute;
+      // right:80%;
+      // margin: 8px;
+      // font-size: 14px;
+      width: 20%;
+      word-wrap:normal;
+  
 }
-   .s{
-        font-size: 8px;
-     }
 
     input[type='radio']:after {
         width: 15px;
         height: 15px;
         border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: #d1d3d1;
+        // top: -1px;
+        // left: -1px;
+        // position: relative;
+        background-color: white;
         content: '';
         display: inline-block;
         visibility: visible;
-        border: 2px solid white;
+        border: 1px solid #d1d3d1;
+       
+   
     }
 
     input[type='radio']:checked:after {
         width: 15px;
         height: 15px;
         border-radius: 15px;
-        top: -2px;
-        left: -1px;
-        position: relative;
-        background-color: #ffa500;
+        // top: -1px;
+        // left: -1px;
+        // position: relative;
+        background-image:radial-gradient(circle,orange 50%,white 20%);
         content: '';
         display: inline-block;
         visibility: visible;
-        border: 2px solid white;
+        border: 1px solid grey;
     }
 @import "../styles/my-styles.scss";
     .d1{
@@ -136,5 +234,48 @@ button{
   outline: none;
   margin-right: 90px;
   }
+ }
+ .form--rad{
+   text-align: right;
+   margin-bottom: 15px;
+   select{
+     width:61.5%;
+     height:23px;
+     border-radius: 0px 0px 0px 0px;
+     outline: none;
+   }
+   label{
+     margin-right: 23px;
+   }
+  .form--contain{
+    display: flex;
+    justify-content: space-around;
+  .form--l1{
+    width: 34%;
+  }
+  .form--de{
+    width: 37%;
+    display: flex;
+   .form--i1{
+    width: 11%;
+  }
+   .form--l2{
+    width: 76%;
+  }
+
+  }
+ .form--dena{
+    width: 27%;
+    display: flex;
+     .form--i2{
+    width: 11%;
+  }
+   .form--l3{
+    width: 76%;
+  }
+  }
+   }
+
+
  }
 </style>

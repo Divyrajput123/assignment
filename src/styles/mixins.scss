@@ -12,26 +12,26 @@ h1{
     color:$color;
   }
 }
-@mixin EduPro(){
-  main{
-    max-width: 400px;
-    position: relative;
-    margin: auto;
+// @mixin EduPro(){
+//   main{
+//     max-width: 400px;
+//     position: relative;
+//     margin: auto;
   
-  label{
-    font-size: 14px;
-    position: absolute;
-    right:370px;
-  }
-  input{
-    width: 57%;
-  }
-  select{
-    height: 30px;
-    margin: 10px 40px; 
-  }  
-}
-}
+//   label{
+//     font-size: 14px;
+//     position: absolute;
+//     right:370px;
+//   }
+//   input{
+//     width: 57%;
+//   }
+//   select{
+//     height: 30px;
+//     margin: 10px 40px; 
+//   }  
+// }
+// }
 @mixin CommonButton{
  
     display: flex;

@@ -157,12 +157,7 @@ prevQ(){
   height: 25px;
   outline: none;
 }
-// .container--q1{
-//   display: flex;
-  
-   
- 
-// }
+
 
     
 

@@ -30,18 +30,18 @@ export default {
 <style scoped lang="scss">
 
 .container--mod{
- max-width: 60%;
+ max-width: 80%;
  display: flex;
  flex-wrap: wrap;
  margin-left: 30%;
- position: relative;
+//  position: relative;
 }
 input{
   margin: 20px 16px;
 }
 input[type=checkbox]{
   -webkit-appearance: none;
-  width: 16px;
+  width: 15px;
   height: 16px;
   border: 1px solid lightgray;
   border-radius: 50%;
@@ -69,6 +69,8 @@ input[type=checkbox]:checked:before{
 .container--sub{
   display: flex;
   margin-right: 20px;
+  width: 30%;
+  
 }
 
 

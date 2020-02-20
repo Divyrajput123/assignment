@@ -1,27 +1,40 @@
 <template>
   <main>
-   <div>
-      <label>Education</label><input @blur="setSchool($event)" type="text" placeholder="School"><br>
-      <select @change="saveYear($event)" >
-        <option value="0">Enrolled</option>
-        <option v-for="year in years" :value="year" v-bind:key="year" >{{ year }}</option>
-      </select>
-     <select @change="setActiveTo" @blur="send">
-      <option value="0">Graduated</option>
-      <option v-for="Activetoyear in Activetoyears" :value="Activetoyear" v-bind:key="Activetoyear">{{Activetoyear }}</option>
-     </select>
-  </div>
-    <div v-for="(n,index) in school.length" v-bind:key="index">
-      <label>Education</label><input type="text" placeholder="School"><br>
-      <select @change="saveYear($event)" >
-        <option value="0">Enrolled</option>
-        <option v-for="year in years" :value="year" v-bind:key="year" >{{ year }}</option>
-      </select>
-     <select @change="setActiveTo" @blur="send">
-       <option value="0">Graduated</option>
-       <option v-for="Activetoyear in Activetoyears" :value="Activetoyear" v-bind:key="Activetoyear">{{Activetoyear }}</option>
-     </select>
+    <div class="Edu Edu--container">
+      <div class="Edu Edu--mod">
+        <div class="Edu Edu--a1">
+          <label>Education</label>
+          <input @blur="setSchool($event)" type="text" placeholder="School"><br>
+        </div>
+        <div class="Edu Edu--a2">
+           <select @change="saveYear($event)" >
+           <option value="0">Enrolled</option>
+           <option v-for="year in years" :value="year" v-bind:key="year" >{{ year }}</option>
+           </select>
+           <select @change="setActiveTo" @blur="send">
+           <option value="0">Graduated</option>
+           <option v-for="Activetoyear in Activetoyears" :value="Activetoyear" v-bind:key="Activetoyear">{{Activetoyear }}</option>
+           </select>
+        </div>
+      </div>
+    <div class="Edu Edu--mod" v-for="(n,index) in school.length" v-bind:key="index">
+      <div class="Edu Edu--a1">
+        <label>Education</label>
+        <input type="text" placeholder="School"><br>
+      </div>
+      <div class="Edu Edu--a2">
+       <select @change="saveYear($event)" >
+         <option value="0">Enrolled</option>
+         <option v-for="year in years" :value="year" v-bind:key="year" >{{ year }}</option>
+       </select>
+      
+       <select @change="setActiveTo" @blur="send">
+         <option value="0">Graduated</option>
+         <option v-for="Activetoyear in Activetoyears" :value="Activetoyear" v-bind:key="Activetoyear">{{Activetoyear }}</option>
+       </select>
+      </div>
     </div>
+   </div>
   </main>
 </template>
 
@@ -72,8 +85,41 @@ methods:{
 </script>
 
 <style scoped lang="scss">
-@import "../styles/my-styles.scss";
-main{
-   @include EduPro;
-}
+
+  .Edu--container{
+    margin-left: 2%;
+    width:100%;
+  .Edu--mod{
+    width: 37%;
+    margin-left: 23%;
+    label{
+      width:20%;
+    }
+    input{
+      width:80%;
+    }
+    .Edu--a1{
+      display: flex;
+      margin-bottom: 2%;
+      label{
+        margin-right: 6%;
+        margin-left: 17%
+      }
+    }
+    .Edu--a2{
+      display:flex;
+      width: 60%;
+      margin-left: 40%;
+      margin-bottom: 2%;
+      justify-content: space-between;
+      select{
+      height: 20px;
+      }
+    }
+  }
+  .Edu--i1{
+   height: 10%;
+   width: 2%;
+  }
+  }
 </style>

@@ -12,8 +12,8 @@
        </div>
     </div>
     <div class="navigate navigate--button">
-      <button @click="prev"> Prev</button>
-      <button :disabled="skills.length<=0" @click="nextPage">Next</button>
+      <button @click="prev" class="navigate navigate__button1"> Prev</button>
+      <button :disabled="skills.length<=0" @click="nextPage" class="navigate navigate__button2">Next</button>
     </div>
   </main>
 </template>
@@ -88,7 +88,8 @@ Skills
 <style scoped lang="scss">
 @import "../styles/my-styles.scss";
 .courses--sidenav {
-  width: 25%;
+  max-width: 20%;
+  min-width: 20%;
   position: relative;
   z-index: 1;
   left: 0;
@@ -113,18 +114,38 @@ Skills
 //   background-color:white;
 //   border-left:5px solid orange;  
 // }
-.navigate--button{ 
-   position: absolute;
-   display:flex;
-  @include CommonButton;
-   justify-content: space-around;
-   width: 90%;
-   bottom: 40px;
+.navigate--button{
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 40px;
+  width:100%;
+.navigate__button1 {
+  background-color: orange;
+  border-radius: 12px;
+  width: 76px;
+  height: 25px;
+  outline: none;
+    }
+.navigate__button2{
+  background-color: orange;
+  border-radius: 12px;
+  width: 76px;
+  height: 25px;
+  outline: none;
+}
+
+
+    
+
 }
 .courses--select{
   display: flex;
   position: relative;
   bottom: 20px;
   
+}
+.subject--select{
+  width: 100%;
 }
 </style>

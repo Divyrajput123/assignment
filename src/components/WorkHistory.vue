@@ -1,27 +1,36 @@
 <template>
   <main>
-    <div>
-      <label>WorkHistory</label><input @blur="setCompany($event)" type="text" placeholder="Company"><br>
-    <select @change="saveYear($event)" >
-      <option value="0">Active From</option>
-      <option v-for="year in years" :value="year" v-bind:key="year" >{{ year }}</option>
-    </select>
-    <select @change="setActiveTo" @blur="send">
-      <option value="0">Active to</option>
-      <option v-for="Activetoyear in Activetoyears" :value="Activetoyear" v-bind:key="Activetoyear">{{Activetoyear }}</option>
+   <div class="work work--container">
+    <div class="work work--mod">
+      <div class="work work--a1">
+        <label>WorkHistory</label>
+        <input @blur="setCompany($event)" type="text" placeholder="Company"><br>
+      </div>
+      <div class="work work--a2">
+        <select class="work work--s1" @change="saveYear($event)" >
+          <option class="work work--s1" value="0">Active From</option>
+          <option v-for="year in years" :value="year" v-bind:key="year" >{{ year }}</option>
+        </select>
+     
+        <select class="work work--s1" @change="setActiveTo" @blur="send">
+          <option value="0">Active to</option>
+          <option v-for="Activetoyear in Activetoyears" :value="Activetoyear" v-bind:key="Activetoyear">{{Activetoyear }}</option>
+        </select>
+       </div>
+    </div>
+    <div class="work work--mod" v-for="(n,index) in work.length" v-bind:key="index">
+      <label>WorkHistory</label>
+      <input type="text" placeholder="Company"><br>
+      <select @change="saveYear($event)" >
+       <option value="0">Active From</option>
+       <option v-for="year in years" :value="year" v-bind:key="year" >{{ year }}</option>
+      </select>
+      <select @change="setActiveTo" @blur="send">
+       <option value="0">Active to</option>
+       <option v-for="Activetoyear in Activetoyears" :value="Activetoyear" v-bind:key="Activetoyear">{{Activetoyear }}</option>
     </select>
     </div>
-    <div v-for="(n,index) in work.length" v-bind:key="index">
-    <label>WorkHistory</label><input type="text" placeholder="Company"><br>
-    <select @change="saveYear($event)" >
-      <option value="0">Active From</option>
-      <option v-for="year in years" :value="year" v-bind:key="year" >{{ year }}</option>
-    </select>
-    <select @change="setActiveTo" @blur="send">
-      <option value="0">Active to</option>
-      <option v-for="Activetoyear in Activetoyears" :value="Activetoyear" v-bind:key="Activetoyear">{{Activetoyear }}</option>
-    </select>
-    </div>
+   </div>
   </main>
 </template>
 
@@ -75,8 +84,43 @@ methods:{
 </script>
 
 <style scoped lang="scss">
-@import "../styles/my-styles.scss";
-main{
-   @include EduPro;
-}
+
+  .work--container{
+    margin-left: 2%;
+    width:100%;
+  .work--mod{
+    width: 37%;
+    margin-left: 23%;
+    label{
+      width:20%;
+    }
+    input{
+      width:80%;
+    }
+    .work--a1{
+      display: flex;
+      margin-bottom: 2%;
+      label{
+        margin-right: 6%;
+        margin-left: 14%
+      }
+    }
+    .work--a2{
+      display:flex;
+      width: 60%;
+      margin-left: 40%;
+      margin-bottom: 2%;
+      justify-content: space-between;
+      select{
+      height: 20px;
+      }
+    }
+  }
+  .work--i1{
+   height: 10%;
+   width: 2%;
+  }
+  }
+
+
 </style>

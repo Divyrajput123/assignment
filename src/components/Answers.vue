@@ -2,7 +2,7 @@
   <main>
       <div v-for="(question,index) in Answers" v-bind:key="question">
          <p>{{Answers[index].value}}</p>
-         <textarea @input="flagchange($event,index)" @change="flagchange($event,index)" @blur="send;flagchange($event,index)" v-model="answers[Answers[index].index]" cols="85" rows="5"></textarea>
+         <textarea @input="flagchange($event,index)" @change="flagchange($event,index)" @blur="send();flagchange($event,index)" v-model="answers[Answers[index].index]" cols="85" rows="5"></textarea>
          <p v-if="errors[index].Flag==false" style="color:red;margin-left:19%">{{errors[index].message}}</p>
  
       </div>
