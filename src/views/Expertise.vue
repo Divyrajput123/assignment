@@ -2,6 +2,7 @@
   <main>
     <div class="d3">
       <expertise ></expertise>
+      
     </div>
   </main>
 </template>
@@ -12,7 +13,15 @@ import Expertise from '../components/Expertise.vue'
 export default {
  components:{
    Expertise
- }
+ },
+created:function(){
+  if(localStorage.getItem('done')<=2)
+    this.$router.push('/error')
+},
+mounted(){
+  localStorage.setItem('active',3)
+  this.$store.state.index=this.$store.state.counter++
+}
 }
 </script>
 

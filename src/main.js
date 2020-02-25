@@ -12,3 +12,9 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+export const globalStore = new Vue({
+  data: {
+    count: 0
+  }
+})

@@ -19,8 +19,11 @@
        </div>
     </div>
     <div class="work work--mod" v-for="(n,index) in work.length" v-bind:key="index">
-      <label>WorkHistory</label>
-      <input type="text" placeholder="Company"><br>
+      <div class="work work--a1">
+       <label>WorkHistory</label>
+       <input type="text" placeholder="Company"><br>
+      </div>
+      <div class="work work--a2">
       <select @change="saveYear($event)" >
        <option value="0">Active From</option>
        <option v-for="year in years" :value="year" v-bind:key="year" >{{ year }}</option>
@@ -29,6 +32,7 @@
        <option value="0">Active to</option>
        <option v-for="Activetoyear in Activetoyears" :value="Activetoyear" v-bind:key="Activetoyear">{{Activetoyear }}</option>
     </select>
+     </div>
     </div>
    </div>
   </main>
@@ -44,7 +48,8 @@ data:function(){
     company:'',
     ActiveFrom:0,
     ActiveTo:0,
-    workHistory:[]
+    workHistory:[],
+    errors:[]
   }
 },
 computed:{
@@ -79,7 +84,8 @@ methods:{
    this.$emit('updatework', this.workHistory)
    this.workHistory=[]
   }
-}
+},
+
 }
 </script>
 
@@ -112,7 +118,11 @@ methods:{
       margin-bottom: 2%;
       justify-content: space-between;
       select{
-      height: 20px;
+      height: 22px;
+      width:48%;
+      border-radius: 0px;
+      -webkit-appearance: none;
+      -webkit-border-radius: 0px; 
       }
     }
   }

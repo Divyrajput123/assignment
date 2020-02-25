@@ -113,7 +113,11 @@ methods:{
       margin-bottom: 2%;
       justify-content: space-between;
       select{
-      height: 20px;
+      height: 22px;
+      border-radius: 0px;
+      -webkit-appearance: none;
+      -webkit-border-radius: 0px; 
+      width:48%;
       }
     }
   }

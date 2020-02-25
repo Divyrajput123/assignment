@@ -16,22 +16,31 @@
 export default {
 methods:{
 activate:function(el){
-  this.active_el = el;
-  this.done=el
-  localStorage.setItem('done',this.done)
-  localStorage.setItem('active',el)
   window.console.log(this.active_el)
-  if(this.active_el==1){
-    this.$router.push('/sample')
+  if(el==1 && this.done>=1){
+    this.active_el = el;
+    localStorage.setItem('active',el)
+    this.$router.push('/')
   }
-   if(this.active_el==2){
+   if(el==2 && this.done>=2){
+    this.active_el = el;
+    localStorage.setItem('active',el)
+    
     this.$router.push('/profile')
   }
-  else if(this.active_el==3){
+  else if(el==3 && this.done>=3){
+  this.active_el = el;
+  localStorage.setItem('active',el)
   this.$router.push('/expertise')
   }
-  else if(this.active_el==4){
+  else if(el==4 && this.done>=4){
+  this.active_el = el;
+  localStorage.setItem('active',el)
   this.$router.push('/interview')
+  }
+  if(el==1)
+  {
+     document.querySelector(".active").style.innerHTML='red'
   }
 }
 
@@ -43,10 +52,14 @@ return{
 
 }
 },
-// created:function(){
-//  this.active_el=localStorage.getItem('active')
-//  window.console.log(localStorage.getItem('active'))
-// }
+watch:{
+  active_el:function(val){
+    console.log('hey i am wne')
+    if(val==1)
+     document.querySelector(".active li:before").style.content='red'
+  }
+}
+
 }
 </script>
 
@@ -99,17 +112,13 @@ return{
 .container--progressbar li.active{
   font-weight: bold;
 } 
-.container--progressbar li.active::before{
-  border-color: orange;
-  background-color: orange;
-  color: white;
-} 
 
-// .progressbar li.active+li:after{
-//   border-bottom: 1px dotted orange;
+
+.progressbar li.active+li:after{
+  border-bottom: 1px dotted orange;
   
-// } 
-.container--progressbar li.activate+li:after{
+} 
+.container--progressbar li.done+li:after{
   border-bottom: 1px dotted orange;
 }
 .container--progressbar li.done:before{
@@ -117,4 +126,9 @@ return{
       color: orange;
       font-size: 20px;
 }
+.container--progressbar li.active::before{
+  border-color: orange;
+  background-color: orange;
+  color: white;
+} 
 </style>

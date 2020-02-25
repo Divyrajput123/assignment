@@ -1,9 +1,9 @@
 <template>
   <main>
     <div class="container container--mod">
-     <div class="container container--sub" v-for="item in Subjects" v-bind:key="item" >
-       <input  type="checkbox" :value="item" @change="pushSkills($event)">
-       <label class="contain" for="checkbox">{{item}}</label>
+     <div class="container container--sub" v-for="(item,index) in Subjects" v-bind:key="item" >
+       <input  type="checkbox" :value="item.value" @change="pushSkills($event,index)" v-model="selections[item.index]" >
+       <label class="contain" for="checkbox">{{item.value}}</label>
      </div>
     </div>
 
@@ -15,13 +15,32 @@
 export default {
  data:function(){
   return{ 
-     
+   selections:[],
+   length:0  
   }
  },
- props:['Subjects','Flag'],
+ props:['Subjects'],
  methods:{
-     pushSkills(event){
-     this.$emit('skillUpdate',event.target.value)
+     pushSkills(event,index){
+       localStorage.setItem('selections',JSON.stringify(this.selections))
+       if(this.Subjects[index].Flag==false)
+         this.Subjects[index].Flag=true
+       else
+         this.Subjects[index].Flag=false
+         console.log( this.Subjects[index].Flag)
+
+
+   }
+ },
+ mounted:function(){
+   if(localStorage.getItem('done')>3){
+  this.selections=JSON.parse(localStorage.getItem('selections')) 
+  if(this.selections.length>0)
+      for(var j=0;j<this.selections.length;j++){
+      if(JSON.parse(this.selections[j]!==null && this.selections[j]!==false))
+       this.length++
+}
+this.$emit('length',this.length)
    }
  }
  }
@@ -30,10 +49,12 @@ export default {
 <style scoped lang="scss">
 
 .container--mod{
- max-width: 80%;
+ max-width: 100%;
  display: flex;
  flex-wrap: wrap;
- margin-left: 30%;
+ justify-content:f;
+ margin-left: 5%;
+ margin-top: 10px;
 //  position: relative;
 }
 input{

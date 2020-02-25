@@ -4,7 +4,7 @@
       <div  v-for="(n, index) in placeholder.length" :key="index">
         <div class="form form--rad" v-if="type[index] !== 'radio' && type[index] !== 'date'" >
           <label>{{ label[index] }}</label>
-          <input @input="flagchange($event,index)" v-model="Answers[index]" @change="flagchange($event,index)" v-on:keyup.delete="flagchange($event,index)" :type="type[index]" :placeholder="placeholder[index]">
+          <input @input="flagchange($event,index)" v-model="Answers[index]" @change="flagchange($event,index)" v-on:keyup.delete="flagchange($event,index)" :type="type[index]" :placeholder="placeholder[index]" >
           <p v-show="errors[index].Flag==false " style="color:red;font-size:12px">{{errors[index].message}}</p>
         </div>
         <div class="form form--rad" v-else-if="type[index]=='date'" >
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="navigate--d1">
-      <button id="mybtn" :disabled="!disabled" @click="nextPage" class="navigate--button1">Next</button>
+      <button v-bind:style= "[!disabled ? {color:'grey'} : {backgroundcolor:'orange'}]" id="mybtn" :disabled="!disabled" @click="nextPage" class="navigate--button1">Next -></button>
     </div>
   </main>
 </template>
@@ -63,7 +63,7 @@ methods:{
        const re=/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
        if(re.test(event.target.value)==false)
        {
-         this.errors[index].message='email format is incorrect'
+         this.errors[index].message='Email format is incorrect'
          this.errors[index].Flag=false
 
        }
@@ -87,8 +87,10 @@ methods:{
        
       }
 else{
-  if(event.target.value.length==0)
+  if(event.target.value.length==0){
     this.errors[index].Flag=false
+    this.errors[index].message='Field cant be empty'
+  }
   else {
     this.bool = true
     this.errors[index].Flag=true
@@ -103,10 +105,14 @@ else{
   nextPage()
   { localStorage.setItem('active',2)
     localStorage.setItem('done',2)
+    localStorage.setItem('Answers',JSON.stringify(this.Answers))
+    // eslint-disable-next-line no-debugger
+    debugger
     this.$store.state.index=this.$store.state.counter++;
     this.$router.push('/profile')
   }
 },
+
 watch:{
   errors:{
     handler:function(val,old){
@@ -132,10 +138,13 @@ window.console.log('hello',old,this.flag)
 },
 computed:{
   disabled () {
-    // eslint-disable-next-line no-debugger
-    debugger
-    if(this.Answers.length==0)
+
+    if(this.Answers.length==0){
+
       return false
+    }
+    if(localStorage.getItem('done')==2)
+    return true
     for(var i=0;i<8;i++)
     {
       if(this.Answers[i]==' ')
@@ -152,6 +161,12 @@ computed:{
 
   
 
+},
+mounted:function(){
+  if(JSON.parse(localStorage.getItem('Answers')).length>0)
+  this.Answers=JSON.parse(localStorage.getItem('Answers'))
+
+
 }
 }
 </script>
@@ -161,11 +176,13 @@ computed:{
     position: relative;
     max-width: 500px;
     margin-left:22%;
+
 }
     input{
       // margin: 8px;
       width: 60%;
       height:18px;
+      
       
     }
     label{
@@ -208,70 +225,78 @@ computed:{
         border: 1px solid grey;
     }
 @import "../styles/my-styles.scss";
-    .d1{
-        position: absolute;
-        display: flex;
-        justify-content: space-between;
-        bottom: 40px;
-        width:100%;
-  
 
-    }
 button{
      outline: none;
  }
  .navigate--d1{
-
-  display: flex;
-  justify-content:flex-end;
+  position: absolute;
+  // display: flex;
+  // justify-content:flex-end;
   bottom: 40px;
   width:100%;
   .navigate--button1{
-  background-color: orange;
+  background-color:orange;
   border-radius: 12px;
   width: 76px;
   height: 25px;
   outline: none;
-  margin-right: 90px;
+  color: white;
+  float:right;
+  margin-right:14%;
+  font-size: 12px;
   }
  }
  .form--rad{
    text-align: right;
-   margin-bottom: 15px;
-   select{
-     width:61.5%;
-     height:23px;
-     border-radius: 0px 0px 0px 0px;
-     outline: none;
+   margin-bottom: 6px;
+   min-height: 37px;
+   max-height: 37px;
+   p{
+     margin-top: 0px;
    }
-   label{
-     margin-right: 23px;
+  select{
+    width:61.5%;
+    height:22px;
+    border-radius: 0px;
+    outline: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px; 
+   }
+  label{
+    margin-right: 23px;
+    font-size: 14px;
    }
   .form--contain{
     display: flex;
     justify-content: space-around;
+    margin-left: 18px;
   .form--l1{
     width: 34%;
   }
   .form--de{
-    width: 37%;
+    width: 33%;
     display: flex;
+    text-align: left;
    .form--i1{
-    width: 11%;
+    width: 18%;
   }
    .form--l2{
-    width: 76%;
+    width: 82%;
+    margin-right:0%;
   }
 
   }
  .form--dena{
-    width: 27%;
+    width: 33%;
     display: flex;
-     .form--i2{
-    width: 11%;
+    text-align: left;
+    .form--i2{
+    width: 18%;
   }
    .form--l3{
-    width: 76%;
+    width: 82%;
+    margin-right:0%;
   }
   }
    }

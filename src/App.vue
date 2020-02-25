@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <h3>Sample Project</h3>
-    <progressbar :key="$store.state.index" class="progress"></progressbar>
+    <h3 v-if="['profile', 'sample','expertise','interview'].includes($route.name)">Sample Project</h3>
+    <progressbar :key="this.$store.state.index" class="progress" v-if="['profile', 'sample','expertise','interview','prof'].includes($route.name)"></progressbar>
     <router-view/>
   </div>
 </template>
@@ -35,6 +35,6 @@ export default {
   }
 }
 .progress{
-  margin-bottom: 10%;
+  margin-bottom: 60px;
 }
 </style>

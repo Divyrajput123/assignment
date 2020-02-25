@@ -3,14 +3,14 @@
     <div class="text text--mod">
       <div class="text text--text1">
          <label>About You</label>
-         <textarea @change="flagChange($event,0)" @input="flagChange($event,0)" v-model="error1[0].value" v-on:keyup.delete="flagChange($event,0)" cols="38" rows="4"></textarea>
+         <textarea @change="flagChange($event,0)" @input="flagChange($event,0)" v-model="t1" v-on:keyup.delete="flagChange($event,0)" cols="38" rows="4"></textarea>
       </div>
-      <p class="errmessage" v-show="error1[0].Flag">{{error1[0].message}}</p>
+      <p v-show="error1[0].Flag">{{error1[0].message}}</p>
     <div class="text text--text2">
       <label>Teaching Experience</label>
-      <textarea v-on:keyup.delete="flagChange($event,1)" @change="flagChange($event,1)" @input="flagChange($event,1)"  v-model="error1[1].value" cols="38" rows="4"></textarea>
+      <textarea v-on:keyup.delete="flagChange($event,1)" @change="flagChange($event,1)" @input="flagChange($event,1)" v-model="t2" cols="38" rows="4"></textarea>
     </div>
-    <p class="errmessage" v-show="error1[1].Flag">{{error1[1].message}}</p>
+    <p v-show="error1[1].Flag">{{error1[1].message}}</p>
     </div>
     <!-- <div class="work work--mod"> -->
       <WorkProfile v-bind:error2="error2"></WorkProfile>
@@ -41,8 +41,6 @@ export default {
       bool1:false,
       bool2:false,
       bool3:false,
-      // t1:localStorage.getItem('t1'),
-      // t2:localStorage.getItem('t2')
      
 
     }
@@ -52,10 +50,8 @@ export default {
   },
   methods:{
     flagChange(event,index){
-      localStorage.setItem('error1',JSON.stringify(this.error1))
       if(index==0)
       {  this.error1[index].value=event.target.value
-         localStorage.setItem('t1',event.target.value)
         if(event.target.value=='')
          this.error1[index].Flag=true
         else{
@@ -66,7 +62,6 @@ export default {
       }
       else
       { this.error1[index].value=event.target.value
-        localStorage.setItem('t2',event.target.value)
         if(event.target.value=='')
          this.error1[index].Flag=true
         else
@@ -87,7 +82,7 @@ export default {
      this.$router.push('/')
 },
    nextPage(){
-    
+   
     localStorage.setItem('active',3)
     localStorage.setItem('done',3)
     this.$router.push('/expertise')
@@ -102,20 +97,10 @@ created:function(){
   localStorage.setItem('active',2)
   this.$store.state.index=this.$store.state.counter++
 }
-,
-mounted:function(){
+,mounted:function(){
   this.bool1=false
   this.bool2=false
   this.bool3=false
-  if(JSON.parse(localStorage.getItem('error2')).length>0)
-   this.error2=JSON.parse(localStorage.getItem('error2'))
-  if(JSON.parse(localStorage.getItem('error3')).length>0)
-   this.error3=JSON.parse(localStorage.getItem('error3'))
-  if(JSON.parse(localStorage.getItem('error1')).length>0)
-   this.error1=JSON.parse(localStorage.getItem('error1'))
-   console.log(this.disable)
-   this.disable()
-   
 },
 computed:{
   disable(){
@@ -221,9 +206,6 @@ main{
 
     
 
-}
-.errmessage{
-  margin:-20px 0px 0px -80px;
 }
 
 </style>
